@@ -8,8 +8,8 @@ def camelcase_to_snakecase(df):
     columnas = df.columns
     new_col_names = []
     for col in columnas:
-        pattern = r'([a-z])([A-Z])'
-        replace = r'\1_\2'
+        pattern = r'([a-z])([A-Z])' # Encuentra minúscula seguida de una mayúscula
+        replace = r'\1_\2'          # Reemplaza por minúscula_mayúscula
         snke_case_name = re.sub(pattern=pattern, repl=replace, string=col)
         new_col_names.append(snke_case_name.lower())
     df.columns = new_col_names
