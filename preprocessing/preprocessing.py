@@ -18,6 +18,9 @@ for df in datasets:
 # Convertir la columna end_date a datetime
 df_contract['end_date'] = pd.to_datetime(df_contract['end_date'], errors='coerce')
 
+# Convertir las columans de 2 valores a bool
+df_contract = pd.get_dummies(df_contract, columns=['paperless_billing'], drop_first=True)
+
 # Separar la columna begin_date de df_contract en año, mes y día
 df_contract['begin_day'] = df_contract['begin_date'].dt.day
 df_contract['begin_month'] = df_contract['begin_date'].dt.month
@@ -30,4 +33,4 @@ df_contract['begin_year'] = df_contract['begin_date'].dt.year
 #df_contract['end_year'] = df_contract['end_date'].dt.year
 
 print(df_contract.head(10))
-#print(df_contract.info())
+print(df_contract.info())
