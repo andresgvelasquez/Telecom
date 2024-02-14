@@ -1,3 +1,5 @@
+import re
+
 def camelcase_to_snakecase(df):
     ''' Convierte las columnas de un dataframe de formato CamelCase
     a snake_case y minúsculas.
