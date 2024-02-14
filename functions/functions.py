@@ -18,7 +18,6 @@ def camelcase_to_snakecase(df):
 def column_to_bool(df, columns):
     ''' Convierte el tipo de dato de las columnas con 2 categorias a bool. '''
     df = pd.get_dummies(df, columns=columns, drop_first=True)
-    print(df.head())
     for col in df.columns:
         pattern = r'_([A-Z].*)'     # Encuentra el patron que agrega get_dummies
         replace = ''                # El reemplazo es una cadena vacia
