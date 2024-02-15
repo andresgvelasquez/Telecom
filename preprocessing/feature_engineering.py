@@ -1,7 +1,9 @@
+from imblearn.over_sampling import RandomOverSampler
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
-from imblearn.over_sampling import RandomOverSampler
+
 
 # Carga del dataframe limpio
 df_telecom_clean = pd.read_csv('./files/datasets/intermediate/clean_data.csv')
@@ -22,7 +24,6 @@ features_train, features_test, target_train, target_test = train_test_split(
 # payment_method a ohe
 features_train_encoded = pd.get_dummies(features_train, columns=['payment_method'], drop_first=True)
 features_test_encoded = pd.get_dummies(features_test, columns=['payment_method'], drop_first=True)
-print(features_train_encoded.type.head(10))
 
 # type a label encoding
 label_encoder = LabelEncoder()
@@ -33,6 +34,16 @@ features_test_encoded['type'] = label_encoder.transform(features_test['type'])
 features_train_encoded.to_csv('./files/datasets/intermediate/train_encoded.csv', index=False)
 features_test_encoded.to_csv('./files/datasets/intermediate/test_encoded.csv', index=False)
 
-# Escalar los datos
+print(features_test_encoded.info())
 
-print(features_train_encoded.type.head(10))
+# Escalar las características de prueba y entrenamiento
+scaler = MinMaxScaler()
+features_train_encoded_scaled = features_train_encoded.copy()
+features_test_encoded_scaled = features_test_encoded.copy()
+columns_to_scale = ['type', 'monthly_charges', 'total_charges','begin_month','begin_year', 'end_month', 'end_year','active_days']
+features_train_encoded_scaled[columns_to_scale] = scaler.fit_transform(features_train_encoded[columns_to_scale])
+features_test_encoded_scaled[columns_to_scale] = scaler.transform(features_test_encoded[columns_to_scale])
+
+# Guardar las características de entrenamiento y prueba con encoder y escalado
+features_train_encoded_scaled.to_csv('./files/datasets/intermediate/train_encoded_scaled.csv', index=False)
+features_test_encoded_scaled.to_csv('./files/datasets/intermediate/test_encoded_scaled.csv', index=False)
