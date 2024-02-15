@@ -1,8 +1,9 @@
 import pandas as pd 
 import sys
 sys.path.append('./functions')
+from functions import camelcase_to_snakecase, column_to_bool, split_dates, real_end_date
 
-from functions import camelcase_to_snakecase, column_to_bool, split_dates
+# Cargar la carpeta con funciones
 
 # Carga de de dataframes
 df_contract = pd.read_csv('./files/datasets/input/contract.csv', parse_dates=['BeginDate'])
@@ -34,19 +35,26 @@ df_personal = df_personal.rename(columns={'gender':'gender_male'})
 # Phone
 df_phone = column_to_bool(df_phone, ['multiple_lines'])
 
-# Separar la columna begin_date de df_contract en año, mes y día
+# Separar la columna begin_date de df_contract en año, mes
 df_contract = split_dates(df_contract, 'begin_date', 'begin')
 
-# Separar la columna end_date de df_contract en año, mes y día
+# Separar la columna end_date de df_contract en año, mes
 df_contract = split_dates(df_contract, 'end_date', 'end')
 
+# Reemplazar los valore ausentes de end_date por el vencimiento de su contrato
+df_contract['end_date'] = df_contract.apply(real_end_date, axis=1)
+
+#df_contract.fillna(9999, inplace=True)
+
+# Crear una columna con los días activo en contract
+#df_contract['active_days'] = (df_contract['end_day'] - df_contract['begin_day']).dt.days
+
+#print((df_contract.begin_date.max()))
 print(df_contract.head(5))
+# Crer una columna si la persona esta activa o no S
 
-# Separar la columna end_date en año, mes y día
-#df_contract['end_day'] = df_contract['end_date'].dt.day
-#df_contract['end_month'] = df_contract['end_date'].dt.month
-#df_contract['end_year'] = df_contract['end_date'].dt.year
+# Eliminar columnas innecesarias begin_date, end_date
 
 
-#print(df_contract.info())
-#print(df_contract.info())
+
+
