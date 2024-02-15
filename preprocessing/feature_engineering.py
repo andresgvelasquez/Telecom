@@ -23,13 +23,16 @@ features_train, features_test, target_train, target_test = train_test_split(
 features_train_encoded = pd.get_dummies(features_train, columns=['payment_method'], drop_first=True)
 features_test_encoded = pd.get_dummies(features_test, columns=['payment_method'], drop_first=True)
 print(features_train_encoded.type.head(10))
+
 # type a label encoding
 label_encoder = LabelEncoder()
 features_train_encoded['type'] = label_encoder.fit_transform(features_train['type'])
 features_test_encoded['type'] = label_encoder.transform(features_test['type'])
 
+# Guardar los dataset con encoder
+features_train_encoded.to_csv('./files/datasets/intermediate/train_encoded.csv', index=False)
+features_test_encoded.to_csv('./files/datasets/intermediate/test_encoded.csv', index=False)
 
-# Guardar el dataset
-#df_all.to_csv('./files/datasets/intermediate/clean_data.csv', index=False)
+# Escalar los datos
 
 print(features_train_encoded.type.head(10))
