@@ -1,18 +1,18 @@
 # Preprocessing
 
-## Info
-
-**NOTA**: Una vez empezado el proyecto borrar la sección de info y completar la descripción.
-
-+ En esta carpeta deben estar los scripts para crear el tablón para modelar.
-+ En este READM.md se deberá incluir una breve descripción de cada scripts
-+ Cada script debe empezar con una letra que represente a una familia de reporte
-    * p00_prepro.R 
-    * p01_prepro_test_train.R contraparte.
-    * n00_prepro_mensual.R 
-    * **Explicación:** "p" representa una familia de script para crear un tablón específico, distinto al tablon de los script de la familia "n"
-+ Luego de cada letra, se debe incluir en número empezando con el 00 indicando temporalidad o dependencia.
-    * p00_prepro.R -> "00" representa que se debe empezar con este script para el tablon "p"
-    * p01_prepro_test_train.R -> "01" representa que es segunda script que se debe ejecutar de la familia "p"
-    * n00_prepro_mensual.R  -> "00" representa que se debe empezar con este script para el tablón "n"
 ## Descripción
+
+**p00_preprocessing.py** 
+Se encarga de juntar los dataframes (contract, internet, personal, phone) que el cliente proporciono (la información cruda). 
+Finalmente crea un nuevo dataframe limpio llamado clean_data. 
++ Carga los dataframes.
++ Da un formato snake_case a las columnas.
++ Convirte las columnas al tipo de dato correcto.
++ Agrega nuevas columnas.
++ Elimina columnas innecesarias.
++ Elimina valores ausentes.
+
+**p01_feature_engineering.py**
+Obtiene el dataframe limpio clean_data y prepara la información para que pueda ser introducida en los distintos modelos,
+es decir, divide el dataframe en entrenamiento/prueba y crea distintos dataframes con escaladado, sin escalar, con one hot encoding y con label encoder.
+Se obtienen los dataframes test_encoded, train_encoded, test_encoded_scaled y train_encoded_scaled.
