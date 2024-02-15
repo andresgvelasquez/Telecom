@@ -2,7 +2,7 @@ import pandas as pd
 import sys
 sys.path.append('./functions')
 from pandas._libs.tslibs.nattype import NaTType
-from functions import camelcase_to_snakecase, column_to_bool, split_dates, real_end_date, calculate_active_days
+from functions import camelcase_to_snakecase, column_to_bool, split_dates, real_end_date, calculate_active_days, is_active
 
 # Cargar la carpeta con funciones
 
@@ -35,8 +35,9 @@ df_personal = df_personal.rename(columns={'gender':'gender_male'})
 
 # Phone
 df_phone = column_to_bool(df_phone, ['multiple_lines'])
-
-# Crer una columna si la persona esta activa o no
+print(df_contract.head(5))
+# Crear una columna que diga si la persona esta activa o no
+df_contract['is_active'] = df_contract.apply(is_active, axis=1)
 
 # Reemplazar los valores ausentes de end_date por el vencimiento del contrato
 df_contract['end_date'] = df_contract.apply(real_end_date, axis=1)

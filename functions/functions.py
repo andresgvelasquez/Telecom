@@ -77,3 +77,9 @@ def calculate_active_days(user_info):
     if end_active_day > pd.to_datetime('2020-01-01'):
         end_active_day = pd.to_datetime('2020-01-01')
     return (end_active_day - user_info['begin_date']).days
+
+def is_active(user_info):
+    ''' Verifica si la persona sigue activa.
+    Si tiene NaT, significa que la persona esta activa y se pondra un True.
+    En caso contrario se agrega un False.'''
+    return pd.isna(user_info['end_date'])
