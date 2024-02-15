@@ -38,11 +38,11 @@ def caculate_end_date_by_year(user_info, last_year=2020, last_month=2, add_n_yea
     ''' Calcula la fecha de terminacion de contrato de 1 o mas años.'''
     # Contrato por años
     # Para los que empezaron en el año actual
-    if (user_info['begin_year'] == last_year) & (add_n_years):
+    if (user_info['begin_date'].year == last_year) & (add_n_years):
         return user_info['begin_date'] + pd.DateOffset(years=add_n_years) # Agrega años
     # Para los que empezaron el año anterior
     else:
-        return pd.to_datetime(f'{last_year-1}-{user_info['begin_month']}-01') + pd.DateOffset(years=add_n_years)
+        return pd.to_datetime(f'{last_year-1}-{user_info['begin_date'].month}-01') + pd.DateOffset(years=add_n_years)
 
 def real_end_date(user_info):
     ''' Para las observaciones con valores NaT, se reemplazara la fecha de terminación
@@ -55,10 +55,10 @@ def real_end_date(user_info):
 
         # Contrato mes a mes 
         # Para los que empezaron su contrato en febrero
-        if (type_contract == 'Month-to-month') & (user_info['begin_month'] == 2):
+        if (type_contract == 'Month-to-month') & (user_info['begin_date'].month == 2):
             return user_info['begin_date'] + pd.DateOffset(months=1) # Agregar un mes
         # Para los que empezaron su contrato en enero
-        elif (type_contract == 'Month-to-month') & (user_info['begin_month'] == 1):
+        elif (type_contract == 'Month-to-month') & (user_info['begin_date'].month == 1):
             return pd.to_datetime('2020-02-01') # Vence en febrero
         
         # Dependiendo los años del contrato regresa una fecha
