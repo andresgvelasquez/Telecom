@@ -27,10 +27,21 @@ def column_to_bool(df, columns):
     return df 
 
 def split_dates(df, date_column, prefix):
-    ''' Separa la columna de fecha tipo datetime en 3 distinas columnas (dia/mes/año).
+    ''' Separa la columna de fecha tipo datetime en 2 distinas columnas (mes/año).
     date_column: Columna con las fechas a dividir.
     prefix: nombre de la nueva columna. '''
-    df[f'{prefix}_day'] = df[date_column].dt.day
     df[f'{prefix}_month'] = df[date_column].dt.month
     df[f'{prefix}_year'] = df[date_column].dt.year
     return df
+
+#def real_end_date(user_info, last_date):
+#    ''' Para las observaciones con valores NaT, se reemplazara la fecha de terminación
+#    por la fecha en la que acaba su contrato. 
+#    last_date: fecha actual'''
+#    # Solo aplicar a los usuarios sin fecha de terminación
+#    if user_info['end_date'] == pd.NaT:
+#        type_contract = user_info['type'] # Extraer el tipo de contrato
+#        # Para los usuarios mes a mes
+#        if type_contract == 'Month-to-month':
+#            user_info['end_date'] = user_info['end_date']
+    
