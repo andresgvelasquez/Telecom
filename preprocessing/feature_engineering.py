@@ -15,12 +15,21 @@ over_sampler = RandomOverSampler(random_state=42)
 features_oversampled, target_oversampled = over_sampler.fit_resample(features, target)
 
 # Dividir el dataframe en entrenamiento y prueba
-#features_train, features_test, target_train, target_test = train_test_split(
-#    features, target, test_size=0.2, random_state=42
-#)
+features_train, features_test, target_train, target_test = train_test_split(
+    features_oversampled, target_oversampled, test_size=0.2, random_state=42
+)
+
+# payment_method a ohe
+features_train_encoded = pd.get_dummies(features_train, columns=['payment_method'], drop_first=True)
+features_test_encoded = pd.get_dummies(features_test, columns=['payment_method'], drop_first=True)
 
 # type a label encoding
-label_enc = LabelEncoder()
-# payment_method a ohe
+#label_encoder = LabelEncoder()
+#features_train['type'] = label_encoder.fit_transform(features_train['type'])
+#features_test['type'] = label_encoder.transform(features_test[type])
 
-print(target_oversampled.value_counts())
+
+# Guardar el dataset
+#df_all.to_csv('./files/datasets/intermediate/clean_data.csv', index=False)
+
+print(features_train_encoded.info())
