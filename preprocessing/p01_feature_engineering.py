@@ -20,6 +20,10 @@ features_train, features_test, target_train, target_test = train_test_split(
     features_oversampled, target_oversampled, test_size=0.2, random_state=42
 )
 
+# Guardar el objetivo de entrenamiento y prueba
+target_train.to_csv('./files/datasets/intermediate/target_train_encoded.csv', index=False)
+target_test.to_csv('./files/datasets/intermediate/target_test_encoded.csv', index=False)
+
 # payment_method a ohe
 features_train_encoded = pd.get_dummies(features_train, columns=['payment_method'], drop_first=True)
 features_test_encoded = pd.get_dummies(features_test, columns=['payment_method'], drop_first=True)
@@ -29,9 +33,9 @@ label_encoder = LabelEncoder()
 features_train_encoded['type'] = label_encoder.fit_transform(features_train['type'])
 features_test_encoded['type'] = label_encoder.transform(features_test['type'])
 
-# Guardar los dataset con encoder
-features_train_encoded.to_csv('./files/datasets/intermediate/train_encoded.csv', index=False)
-features_test_encoded.to_csv('./files/datasets/intermediate/test_encoded.csv', index=False)
+# Guardar las características y objetivo con encoder
+features_train_encoded.to_csv('./files/datasets/intermediate/features_train_encoded.csv', index=False)
+features_test_encoded.to_csv('./files/datasets/intermediate/features_test_encoded.csv', index=False)
 
 # Escalar las características de prueba y entrenamiento
 scaler = MinMaxScaler()
@@ -42,5 +46,5 @@ features_train_encoded_scaled[columns_to_scale] = scaler.fit_transform(features_
 features_test_encoded_scaled[columns_to_scale] = scaler.transform(features_test_encoded[columns_to_scale])
 
 # Guardar las características de entrenamiento y prueba con encoder y escalado
-features_train_encoded_scaled.to_csv('./files/datasets/intermediate/train_encoded_scaled.csv', index=False)
-features_test_encoded_scaled.to_csv('./files/datasets/intermediate/test_encoded_scaled.csv', index=False)
+features_train_encoded_scaled.to_csv('./files/datasets/intermediate/features_train_encoded_scaled.csv', index=False)
+features_test_encoded_scaled.to_csv('./files/datasets/intermediate/features_test_encoded_scaled.csv', index=False)
