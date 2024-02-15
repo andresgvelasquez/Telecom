@@ -68,3 +68,12 @@ def real_end_date(user_info):
             return caculate_end_date_by_year(user_info, add_n_years=2)
     else:
         return user_info['end_date']
+    
+def calculate_active_days(user_info):
+    ''' Calcula los días en las que un usuario estuvo activo, limitado por el último dia registrado
+    de cancelación/terminación de contrato. '''
+    end_active_day = user_info['end_date']
+    # Limitar la fecha al último día registrado
+    if end_active_day > pd.to_datetime('2020-01-01'):
+        end_active_day = pd.to_datetime('2020-01-01')
+    return (end_active_day - user_info['begin_date']).days
