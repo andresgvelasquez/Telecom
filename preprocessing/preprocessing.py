@@ -20,6 +20,10 @@ for df in datasets:
 # Convertir la columna end_date a datetime
 df_contract['end_date'] = pd.to_datetime(df_contract['end_date'], errors='coerce')
 
+# Reemplazar las cadenas vacias con '0', debido a que el mes no ha empezado
+# el cliente no ha tenido cargos. Y cambiar el tipo de dato a float. 
+df_contract['total_charges'] = df_contract['total_charges'].replace(' ', '0').astype(float)
+
 # Convertir las columas de 2 valores a bool
 # Contract
 df_contract = column_to_bool(df_contract, ['paperless_billing'])
@@ -65,5 +69,6 @@ df_all.fillna(False, inplace=True)
 # Eliminar la columna de ids
 df_all.drop('customer_id', axis=1, inplace=True)
 
+print(df_all.info())
 # Guardar el dataset
 df_all.to_csv('./files/datasets/intermediate/clean_data.csv', index=False)
