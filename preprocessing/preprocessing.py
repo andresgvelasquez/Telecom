@@ -51,13 +51,13 @@ df_contract = split_dates(df_contract, 'end_date', 'end')
 # Crear una columna con los días activo en contract
 df_contract['active_days'] = df_contract.apply(calculate_active_days, axis=1)
 
-#print((df_contract.begin_date.max()))
-print(df_contract.head(5))
-
 # Eliminar columnas innecesarias para el modelo begin_date, end_date
 df_contract.drop(['begin_date', 'end_date'], axis=1, inplace=True)
 
-print(df_contract)
+# Mezclar df_contract con df_internet
+df_contract_internet = pd.merge(df_contract, df_internet, on='customer_id')
+
+
 
 
 
