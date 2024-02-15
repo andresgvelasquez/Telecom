@@ -64,8 +64,8 @@ def real_end_date(user_info):
 
         # Dependiendo el tipo de contrato se regresa una fecha de terminación
         if type_contract == 'Month-to-month':
-            caculate_end_date(add_n_months=1)
+            return caculate_end_date(add_n_months=1)
         elif type_contract == 'One year':
-            caculate_end_date(add_n_years=1)
+            return caculate_end_date(add_n_years=1)
         else:
-            caculate_end_date(add_n_years=2)
+            return caculate_end_date(add_n_years=2)
