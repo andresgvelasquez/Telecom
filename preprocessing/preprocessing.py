@@ -35,7 +35,7 @@ df_personal = df_personal.rename(columns={'gender':'gender_male'})
 
 # Phone
 df_phone = column_to_bool(df_phone, ['multiple_lines'])
-print(df_contract.head(5))
+
 # Crear una columna que diga si la persona esta activa o no
 df_contract['is_active'] = df_contract.apply(is_active, axis=1)
 
@@ -54,11 +54,10 @@ df_contract['active_days'] = df_contract.apply(calculate_active_days, axis=1)
 #print((df_contract.begin_date.max()))
 print(df_contract.head(5))
 
+# Eliminar columnas innecesarias para el modelo begin_date, end_date
+df_contract.drop(['begin_date', 'end_date'], axis=1, inplace=True)
 
-
-
-# Eliminar columnas innecesarias begin_date, end_date
-
+print(df_contract)
 
 
 
