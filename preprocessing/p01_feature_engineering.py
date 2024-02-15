@@ -21,8 +21,8 @@ features_train, features_test, target_train, target_test = train_test_split(
 )
 
 # Guardar el objetivo de entrenamiento y prueba
-target_train.to_csv('./files/datasets/intermediate/target_train_encoded.csv', index=False)
-target_test.to_csv('./files/datasets/intermediate/target_test_encoded.csv', index=False)
+target_train.to_csv('./files/datasets/intermediate/target_train.csv', index=False)
+target_test.to_csv('./files/datasets/intermediate/target_test.csv', index=False)
 
 # payment_method a ohe
 features_train_encoded = pd.get_dummies(features_train, columns=['payment_method'], drop_first=True)
