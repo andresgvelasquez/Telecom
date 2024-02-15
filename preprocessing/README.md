@@ -15,4 +15,4 @@ Finalmente crea un nuevo dataframe limpio llamado clean_data.
 **p01_feature_engineering.py**
 Obtiene el dataframe limpio clean_data y prepara la información para que pueda ser introducida en los distintos modelos,
 es decir, divide el dataframe en entrenamiento/prueba y crea distintos dataframes con escaladado, sin escalar, con one hot encoding y con label encoder.
-Se obtienen los dataframes test_encoded, train_encoded, test_encoded_scaled y train_encoded_scaled.
+Se obtienen los dataframes target_train, target_test, features_test_encoded, features_train_encoded, features_test_encoded_scaled y features_train_encoded_scaled.
