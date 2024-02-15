@@ -54,12 +54,13 @@ df_contract['active_days'] = df_contract.apply(calculate_active_days, axis=1)
 # Eliminar columnas innecesarias para el modelo begin_date, end_date
 df_contract.drop(['begin_date', 'end_date'], axis=1, inplace=True)
 
-# Mezclar df_contract con df_internet
-df_all = pd.merge(df_contract, df_internet, on='customer_id')
+# Mezclar todos los dataframes (contrct, internet, personal y phone)
+df_all = pd.merge(df_contract, df_internet, on='customer_id', how='outer')
+df_all = pd.merge(df_all, df_personal, on='customer_id', how='outer')
+df_all = pd.merge(df_all, df_phone, on='customer_id', how='outer')
 
-# Añadir df_personal
-df_all = pd.merge(df_all, df_personal, on='customer_id')
+# Reemplazar los valores ausentes por el merge, por False
+df_all.fillna(False, inplace=True)
 
-print(df_all.info())
-
-
+# Eliminar la columna de ids
+df_all.drop('customer_id', axis=1, inplace=True)
