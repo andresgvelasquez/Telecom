@@ -4,7 +4,6 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 
-
 # Carga del dataframe limpio
 df_telecom_clean = pd.read_csv('./files/datasets/intermediate/clean_data.csv')
 
@@ -33,8 +32,6 @@ features_test_encoded['type'] = label_encoder.transform(features_test['type'])
 # Guardar los dataset con encoder
 features_train_encoded.to_csv('./files/datasets/intermediate/train_encoded.csv', index=False)
 features_test_encoded.to_csv('./files/datasets/intermediate/test_encoded.csv', index=False)
-
-print(features_test_encoded.info())
 
 # Escalar las características de prueba y entrenamiento
 scaler = MinMaxScaler()

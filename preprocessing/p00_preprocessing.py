@@ -1,10 +1,7 @@
-import pandas as pd 
 import sys
-sys.path.append('./functions')
-from pandas._libs.tslibs.nattype import NaTType
+sys.path.append('./functions') # Cargar la carpeta con funciones
+import pandas as pd 
 from functions import camelcase_to_snakecase, column_to_bool, split_dates, real_end_date, calculate_active_days, is_active
-
-# Cargar la carpeta con funciones
 
 # Carga de de dataframes
 df_contract = pd.read_csv('./files/datasets/input/contract.csv', parse_dates=['BeginDate'])
