@@ -55,9 +55,11 @@ df_contract['active_days'] = df_contract.apply(calculate_active_days, axis=1)
 df_contract.drop(['begin_date', 'end_date'], axis=1, inplace=True)
 
 # Mezclar df_contract con df_internet
-df_contract_internet = pd.merge(df_contract, df_internet, on='customer_id')
+df_all = pd.merge(df_contract, df_internet, on='customer_id')
 
+# Añadir df_personal
+df_all = pd.merge(df_all, df_personal, on='customer_id')
 
-
+print(df_all.info())
 
 
