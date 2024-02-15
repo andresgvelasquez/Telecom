@@ -64,3 +64,6 @@ df_all.fillna(False, inplace=True)
 
 # Eliminar la columna de ids
 df_all.drop('customer_id', axis=1, inplace=True)
+
+# Guardar el dataset
+df_all.to_csv('./files/datasets/intermediate/clean_data.csv', index=False)
