@@ -86,7 +86,7 @@ def is_active(user_info):
     En caso contrario se agrega un False.'''
     return pd.isna(user_info['end_date'])
 
-def roc_auc_graph(target_test_filepath, model_predicts_filepath, ):
+def roc_auc_graph(target_test_filepath, model_predicts_filepath, image_name):
     # Cargar las predicciones
     target_test = pd.read_csv(target_test_filepath)
     model_predicts = pd.read_csv(model_predicts_filepath)
@@ -108,3 +108,6 @@ def roc_auc_graph(target_test_filepath, model_predicts_filepath, ):
     plt.title('Receiver Operating Characteristic (ROC)')
     plt.legend(loc="lower right")
     plt.show()
+
+    # Guardar la figura
+    plt.savefig(f'{image_name}.png')
