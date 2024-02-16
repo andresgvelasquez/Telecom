@@ -1,5 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn.dummy import DummyClassifier
 from sklearn.metrics import roc_auc_score, f1_score, accuracy_score
 
