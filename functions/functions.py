@@ -44,7 +44,7 @@ def caculate_end_date_by_year(user_info, last_year=2020, last_month=2, add_n_yea
         return user_info['begin_date'] + pd.DateOffset(years=add_n_years) # Agrega años
     # Para los que empezaron el año anterior
     else:
-        return pd.to_datetime(f'{last_year-1}-{user_info['begin_date'].month}-01') + pd.DateOffset(years=add_n_years)
+        return pd.to_datetime(f'{last_year-1}-{user_info["begin_date"].month}-01') + pd.DateOffset(years=add_n_years)
 
 def real_end_date(user_info):
     ''' Para las observaciones con valores NaT, se reemplazara la fecha de terminación
