@@ -107,7 +107,8 @@ def roc_auc_graph(target_test_filepath, model_predicts_filepath, image_name):
     plt.ylabel('True Positive Rate')
     plt.title('Receiver Operating Characteristic (ROC)')
     plt.legend(loc="lower right")
+    # Guardar la figura
+    plt.savefig(f'./files/modeling_output/figures/{image_name}.png')
     plt.show()
 
-    # Guardar la figura
-    plt.savefig(f'{image_name}.png')
+    
