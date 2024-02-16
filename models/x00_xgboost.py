@@ -26,6 +26,9 @@ bst = xgb.train(params, dtrain, num_rounds, evals=[(dtest, 'test')], early_stopp
 predicts = pd.Series(bst.predict(dtest))
 predicts = pd.Series([True if x >= 0.5 else False for x in predicts])  # Convertir a True o False
 
+# Guardar las predicciones
+predicts.to_csv('./files/datasets/output/xgboost_predicts.csv', index=False)
+
 # Imprime las métricas ROC-AUC, F1 y Accuracy
 print(f'ROC-AUC: {roc_auc_score(target_test, predicts)}')
 print(f'F1: {f1_score(target_test, predicts)}')
