@@ -1,5 +1,7 @@
 import re
+import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.metrics import roc_curve, auc
 
 def camelcase_to_snakecase(df):
     ''' Convierte las columnas de un dataframe de formato CamelCase
@@ -83,3 +85,26 @@ def is_active(user_info):
     Si tiene NaT, significa que la persona esta activa y se pondra un True.
     En caso contrario se agrega un False.'''
     return pd.isna(user_info['end_date'])
+
+def roc_auc_graph(target_test_filepath, model_predicts_filepath, ):
+    # Cargar las predicciones
+    target_test = pd.read_csv(target_test_filepath)
+    model_predicts = pd.read_csv(model_predicts_filepath)
+
+    # Calcular la curva ROC
+    fpr, tpr, thresholds = roc_curve(target_test, model_predicts)
+
+    # Calcular el área bajo la curva ROC (AUC)
+    roc_auc = auc(fpr, tpr)
+
+    # Grafica la curva ROC
+    plt.figure(figsize=(8, 6))
+    plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic (ROC)')
+    plt.legend(loc="lower right")
+    plt.show()
