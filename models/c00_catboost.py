@@ -2,9 +2,9 @@ import pandas as pd
 from catboost import CatBoostClassifier, Pool
 from sklearn.metrics import roc_auc_score, f1_score, accuracy_score
 
-# Carga de datos escalados
-features_train = pd.read_csv('./files/datasets/intermediate/features_train_encoded_scaled.csv')
-features_test = pd.read_csv('./files/datasets/intermediate/features_test_encoded_scaled.csv')
+# Carga de datos no escalados
+features_train = pd.read_csv('./files/datasets/intermediate/features_train_encoded.csv')
+features_test = pd.read_csv('./files/datasets/intermediate/features_test_encoded.csv')
 target_train = pd.read_csv('./files/datasets/intermediate/target_train.csv')
 target_test = pd.read_csv('./files/datasets/intermediate/target_test.csv')
 
