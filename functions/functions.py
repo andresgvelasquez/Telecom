@@ -86,11 +86,12 @@ def is_active(user_info):
     En caso contrario se agrega un False.'''
     return pd.isna(user_info['end_date'])
 
-def roc_auc_graph(target_test_filepath, model_predicts_filepath, image_name, show_img=False):
+def roc_auc_graph(model_predicts_filepath, image_name, title, target_test_filepath='./files/datasets/intermediate/target_test.csv', show_img=False):
     ''' Calcula el area bajo la curva ROC AUC. Guarda la imagen y la muestra.
-    target_test_filepath: ubicación del objetivo de prueba.
     model_predicts_filepath: ubicación de las predicciones del modelo.
     image_name: Nombre de la imagen a crear (se guarda en png) en string, ejemplo: 'mi_imagen').
+    title: Título mostrado en la imagen a crear.
+    target_test_filepath: ubicación del objetivo de prueba.
     show_img: Si es true, mostrara la imagen en la pantalla.'''
     # Cargar las predicciones
     target_test = pd.read_csv(target_test_filepath)
@@ -110,7 +111,7 @@ def roc_auc_graph(target_test_filepath, model_predicts_filepath, image_name, sho
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title('Receiver Operating Characteristic (ROC)')
+    plt.title(title)
     plt.legend(loc="lower right")
     # Guardar la figura
     plt.savefig(f'./files/modeling_output/figures/{image_name}.png')
